@@ -5,7 +5,8 @@ local aux = require 'aux'
 local info = require 'aux.util.info'
 local gui = require 'aux.gui'
 
-local ROW_HEIGHT = 39
+-- CHANGE: was 39    v
+local ROW_HEIGHT = 30
 
 function M:render()
 
@@ -86,7 +87,8 @@ function M.new(parent, on_click, selected)
 		end)
 
 		row.item = gui.item(row)
-		row.item:SetScale(.9)
+		-- CHANGED: was '.9'
+		row.item:SetScale(ROW_HEIGHT/(13/0.3))
 		row.item:SetPoint('LEFT', 2.5, 0)
 		row.item:SetPoint('RIGHT', -2.5, 0)
 		row.item.button:SetScript('OnEnter', function()
