@@ -147,7 +147,7 @@ function M.update_display()
 		-- Create new row frame if needed
 		if not frame.rows[row_count] then
 			local row = CreateFrame('Frame', nil, frame)
-			row:SetHeight(14)
+			row:SetHeight(13)  -- Reduced to 13 from 14 to condense summary.
 			row:SetWidth(260)  -- Reduced width
 
 			-- Item name column
@@ -206,7 +206,7 @@ function M.update_display()
 	end
 
 	-- Resize frame to fit content
-	local estimated_height = 44 + (row_count * 14)  -- Header + rows with reduced padding
+	local estimated_height = 44 + (row_count * 13)  -- Header + rows with reduced padding; Changed from 14 to 13 to account for row height reduction.
 	frame:SetHeight(math.max(60, estimated_height))
 
 	frame:Show()
