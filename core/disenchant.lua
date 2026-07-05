@@ -33,6 +33,23 @@ local WEAPON = T.set(
 	'INVTYPE_RANGEDRIGHT'
 )
 
+local CUSTOM_DISTRIBUTIONS = {
+    -- [Gardening Gloves] modified by TurtleWoW Survival overhaul.
+    [42095] = function()
+        return T.temp-T.list(
+            T.temp-T.map('item_id', 10940, 'min_quantity', 1, 'max_quantity', 2, 'probability', .8),
+            T.temp-T.map('item_id', 10938, 'min_quantity', 1, 'max_quantity', 2, 'probability', .2)
+        )
+    end,
+    -- [Woolen Cape] modified by TurtleWoW.
+    [2584] = function()
+        return T.temp-T.list(
+            T.temp-T.map('item_id', 10940, 'min_quantity', 1, 'max_quantity', 2, 'probability', .8),
+            T.temp-T.map('item_id', 10938, 'min_quantity', 1, 'max_quantity', 2, 'probability', .2)
+        )
+    end,
+}
+
 function M.value(slot, quality, level, item_id)
     local expectation
     for _, event in distribution(slot, quality, level, item_id) do
@@ -50,6 +67,11 @@ function M.value(slot, quality, level, item_id)
 end
 
 function M.distribution(slot, quality, level, item_id)
+    local custom = CUSTOM_DISTRIBUTIONS[item_id]
+    if custom then
+        return custom()
+    end
+
     if not ARMOR[slot] and not WEAPON[slot] or level == 0 then
         return T.acquire()
 	elseif --special items not following general rules

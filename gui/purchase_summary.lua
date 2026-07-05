@@ -141,26 +141,35 @@ function M.update_display()
 
 	-- Create rows for each item
 	local row_count = 0
-	for item_name, summary in purchase_summaries do
+	for item_name, summary in pairs(purchase_summaries) do
 		row_count = row_count + 1
 
 		-- Create new row frame if needed
 		if not frame.rows[row_count] then
 			local row = CreateFrame('Frame', nil, frame)
-			row:SetHeight(14)
+			row:SetHeight(13)  -- Reduced to 13 from 14 to condense summary.
 			row:SetWidth(260)  -- Reduced width
+
+			-- Item icon column
+			local icon = row:CreateTexture(nil, 'OVERLAY')
+			icon:SetPoint("TOPLEFT", row, "TOPLEFT", 0, 0)
+			icon:SetWidth(13)
+			icon:SetHeight(13)
+			icon:SetTexture(texture)
+			icon:SetTexCoord(.08, .92, .08, .92)
+			row.icon = icon
 
 			-- Item name column
 			local item_text = row:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-			item_text:SetPoint('TOPLEFT', row, 'TOPLEFT', 0, 0)
-			item_text:SetWidth(150)
+			item_text:SetPoint('TOPLEFT', row, 'TOPLEFT', 15, 0)  -- 13 + 2 spacing for icon
+			item_text:SetWidth(135)
 			item_text:SetJustifyH('LEFT')
 			item_text:SetTextColor(aux.color.text.enabled())
 			row.item_text = item_text
 
 			-- Count column
 			local count_text = row:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
-			count_text:SetPoint('TOPLEFT', row, 'TOPLEFT', 155, 0)  -- 150 + 5 spacing
+			count_text:SetPoint('TOPLEFT', row, 'TOPLEFT', 155, 0)  -- 15 + 135 + 5 spacing
 			count_text:SetWidth(40)
 			count_text:SetJustifyH('RIGHT')
 			count_text:SetTextColor(aux.color.text.enabled())
@@ -190,6 +199,9 @@ function M.update_display()
 		row.item_text:SetText(item_name)
 		row.count_text:SetText(summary.total_quantity .. 'x')
 
+		-- Set the icon texture
+		row.icon:SetTexture(summary.texture)
+
 		-- Drop copper when displaying gold amounts
 		local cost = summary.total_cost or 0
 		local cost_string
@@ -206,7 +218,7 @@ function M.update_display()
 	end
 
 	-- Resize frame to fit content
-	local estimated_height = 44 + (row_count * 14)  -- Header + rows with reduced padding
+	local estimated_height = 44 + (row_count * 13)  -- Header + rows with reduced padding; Changed from 14 to 13 to account for row height reduction.
 	frame:SetHeight(math.max(60, estimated_height))
 
 	frame:Show()
