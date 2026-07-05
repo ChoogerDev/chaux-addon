@@ -1,8 +1,8 @@
 ## Interface: 11200
-## Author: shirsig, chooger
+## Authors: shirsig, chooger
 ## OptionalDeps: ShaguTweaks
-## Title: chaux
-## Notes: Auction House replacement - Chooger Fork
+## Title: Chaux
+## Notes: Auction House replacement - Chooger's Fork
 ## SavedVariables: aux
 
 libs\package.lua
