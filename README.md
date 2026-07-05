@@ -1,3 +1,32 @@
+# <p align="center">Chaux</p>
+#### <p align="center">Chooger's "Aux" Fork</p>
+## Recent Changes
+> ### Chaux v0.1.0 micro-release!
+> 
+## Overview
+TODO
+## Installation
+TODO
+## FAQ
+TODO
+## Changelog
+### v0.1.0
+> **UI:**
+> 
+> * Post tab item listings have been made smaller overall, but the icon enlarged; you can see more listings without scrolling.
+> * Purchase summary condensed to show more listings before running off screen. Will make scroll-able in the future.
+> * Purchase summaries now has item icons. 
+> 
+> **Backend:**
+> 
+> * Custom disenchant table/exceptions added to aux enchant-value/distribution tooltips calculations. This is just the supporting code, have not fully populated all new custom item disenchants.
+> * Populated new custom disenchant distribution table with Woolen Cloak and Gardening Gloves; in other words, these items now show the correct disenchant value and distribution in tooltips.
+
+---
+
+###### ⇩⇩⇃ Original README.md from fork source OldManAlpha ⇂⇩⇩
+
+---
 # aux Turtle
 
 * Now comes with a new blizz-like theme by default thanks to Oldmana. Use **/aux theme** to switch between them.
